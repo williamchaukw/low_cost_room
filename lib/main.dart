@@ -5,6 +5,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 import './models/property.dart';
 import './models/user.dart';
+import './models/news.dart';
 import './screens/home_screen.dart';
 import './screens/property_list_screen.dart';
 import './screens/user_screen.dart';
@@ -14,6 +15,8 @@ import './screens/property_details_screen.dart';
 import './screens/search_screen.dart';
 import './screens/search_result_screen.dart';
 import './screens/user_property_edit_screen.dart';
+import './screens/news_screen.dart';
+import './screens/mobile_topup_screen.dart';
 import './parse.dart' as parse;
 
 void main() {
@@ -40,6 +43,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: Property()),
         ChangeNotifierProvider.value(value: User()),
+        ChangeNotifierProvider.value(value: News()),
       ],
       child: MaterialApp(
         // title: 'Flutter Demo',
@@ -57,6 +61,8 @@ class MyApp extends StatelessWidget {
           SearchScreen.route: (context) => SearchScreen(),
           SearchResultScreen.route: (context) => SearchResultScreen(),
           UserPropertyEditScreen.route: (context) => UserPropertyEditScreen(),
+          NewsScreen.route: (context) => NewsScreen(),
+          MobileTopupScreen.route: (context) => MobileTopupScreen(),
         },
         home: HomeScreen(),
       ),

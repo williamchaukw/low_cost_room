@@ -63,7 +63,7 @@ class User extends ChangeNotifier {
     }
   }
 
-  Future<bool> createUser(
+  Future<String> createUser(
     String username,
     String password,
     String email,
@@ -81,29 +81,44 @@ class User extends ChangeNotifier {
 
       if (queryResponse.success) {
         if (queryResponse.results != null) {
-          for (var result in queryResponse.results) {
-            return false;
-          }
+          return "Username / Email exist. Please login.";
         } else {
           print("<user.dart> createUser - queryResponse success but no result");
-          var _user = ParseUser.createUser(username, password, email)
-            ..set('contact_number', contactNumber)
-            ..signUp();
-          print("<user.dart> _parseUser response - " + _parseUser.toString());
-          print("<user.dart> createUser - User created successfully");
-          // _loggedInUser.add(new UserItem(
-          //   username: username,
-          //   email: email,
-          //   contactNumber: contactNumber,
-          // ));
-          _parseUser = _user;
-          notifyListeners();
-          return true;
+          ParseUser _user = ParseUser.createUser(username, password, email)
+            ..set('contact_number', contactNumber);
+
+          ParseResponse signUpResponse = await _user.signUp();
+
+          print("<user.dart> createUser - signUpResponse success: " +
+              signUpResponse.success.toString());
+          print("<user.dart> createUser - signUpResponse results: " +
+              signUpResponse.results.toString());
+          print("<user.dart> createUser - signUpResponse error: " +
+              signUpResponse.error.toString());
+
+          if (signUpResponse.success) {
+            print("<user.dart> createUser - User created successfully");
+            _parseUser = _user;
+          } else {
+            return signUpResponse.error.message;
+          }
         }
+
+        // print("<user.dart> _parseUser response - " + _parseUser.toString());
+
+        // _loggedInUser.add(new UserItem(
+        //   username: username,
+        //   email: email,
+        //   contactNumber: contactNumber,
+        // ));
+
+        // _parseUser = _user;
+        notifyListeners();
       }
-      // print("<user.dart> userQuery Response - " +
-      //     queryResponse.results.toString());
-    } catch (e) {
+    }
+    // print("<user.dart> userQuery Response - " +
+    //     queryResponse.results.toString());
+    catch (e) {
       print(e);
     }
   }
@@ -118,11 +133,20 @@ class User extends ChangeNotifier {
 
       var userResponse = await userQuery.query();
 
+      print("<user.dart> userLogin - userResponse success: " +
+          userResponse.success.toString());
+      print("<user.dart> userLogin - userResponse results: " +
+          userResponse.results.toString());
+      print("<user.dart> userLogin - userResponse error: " +
+          userResponse.error.toString());
+
       if (userResponse.success) {
         if (userResponse.results != null) {
           for (var result in userResponse.results) {
             username = result['username'];
           }
+        } else {
+          return 'Email not exist';
         }
       } else {
         return 'Email not exist';
@@ -135,13 +159,7 @@ class User extends ChangeNotifier {
 
         if (queryResponse.success) {
           if (queryResponse.results != null) {
-            for (var userResult in queryResponse.results) {
-              // _loggedInUser.add(new UserItem(
-              //     username: userResult["username"],
-              //     email: userResult["email"],
-              //     contactNumber: userResult["contact_number"]));
-              _parseUser = _loginUser;
-            }
+            _parseUser = _loginUser;
             notifyListeners();
           }
         } else {

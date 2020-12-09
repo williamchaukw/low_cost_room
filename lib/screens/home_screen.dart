@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:low_cost_room/screens/user_add_property_screen.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 import '../screens/property_list_screen.dart';
 import '../screens/user_screen.dart';
 import '../screens/user_property_list_screen.dart';
+import '../screens/news_screen.dart';
+import '../screens/mobile_topup_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static final route = '/home';
@@ -18,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _navigationList = [
     PropertyListScreen(),
     UserPropertyListScreen(),
+    // NewsScreen(),
+    // MobileTopupScreen(),
     UserScreen(),
   ];
 
@@ -29,7 +34,44 @@ class _HomeScreenState extends State<HomeScreen> {
       //   onGenerateRoute: generateRoute,
       // ),
       body: _navigationList[_currentTabIndex],
-      bottomNavigationBar: _bottomNavigationBar(),
+      // bottomNavigationBar: _bottomNavigationBar(),
+      bottomNavigationBar: _ffNavigationBar(),
+    );
+  }
+
+  Widget _ffNavigationBar() {
+    return FFNavigationBar(
+      onSelectTab: _onTap,
+      selectedIndex: _currentTabIndex,
+      items: [
+        FFNavigationBarItem(
+          iconData: Icons.all_inclusive,
+          label: 'Home',
+        ),
+        FFNavigationBarItem(
+          iconData: Icons.home_outlined,
+          label: 'Property',
+        ),
+        // FFNavigationBarItem(
+        //   iconData: Icons.public,
+        //   label: 'News',
+        // ),
+        // FFNavigationBarItem(
+        //   iconData: Icons.payments,
+        //   label: 'Topup',
+        // ),
+        FFNavigationBarItem(
+          iconData: Icons.person,
+          label: 'User',
+        ),
+      ],
+      theme: FFNavigationBarTheme(
+        barBackgroundColor: Colors.white,
+        selectedItemBorderColor: Colors.white,
+        selectedItemBackgroundColor: Colors.blue,
+        selectedItemIconColor: Colors.white,
+        selectedItemLabelColor: Colors.black,
+      ),
     );
   }
 

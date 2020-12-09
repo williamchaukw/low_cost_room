@@ -63,6 +63,7 @@ class _UserPropertyListScreenState extends State<UserPropertyListScreen> {
   Widget build(BuildContext context) {
     final userData = Provider.of<User>(context);
     final propertyData = Provider.of<Property>(context);
+    final deviceSize = MediaQuery.of(context).size;
 
     if (userData.loggedInAccountParse != null) {
       if (!_isInitialized) {
@@ -143,18 +144,50 @@ class _UserPropertyListScreenState extends State<UserPropertyListScreen> {
               child: Column(
                 children: [
                   _isInitialized
-                      ? ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: propertyData.userProperty.length,
-                          itemBuilder: (ctx, cnt) {
-                            print(
-                                '<user_property_list_screen.dart> userProperty length: ' +
-                                    propertyData.userProperty.length
-                                        .toString());
-                            return propertyListTile(
-                                propertyData.userProperty[cnt]);
-                          })
+                      ? propertyData.userProperty.length > 0
+                          ? ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: propertyData.userProperty.length,
+                              itemBuilder: (ctx, cnt) {
+                                print(
+                                    '<user_property_list_screen.dart> userProperty length: ' +
+                                        propertyData.userProperty.length
+                                            .toString());
+                                return propertyListTile(
+                                    propertyData.userProperty[cnt]);
+                              })
+                          : Container(
+                              margin: EdgeInsets.only(top: 30),
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          height: 50,
+                                          alignment: Alignment.bottomCenter,
+                                          child: Text(
+                                            'Add your property now',
+                                            style: TextStyle(fontSize: 20),
+                                          )),
+                                      SizedBox(width: 15),
+                                      Container(
+                                          alignment: Alignment.centerLeft,
+                                          height: 50,
+                                          width: 50,
+                                          child: Image.asset(
+                                              'assets/images/right-up-arrow.png')),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
                       : Center(
                           child: Container(
                             margin: EdgeInsets.symmetric(vertical: 10),

@@ -330,18 +330,18 @@ class _UserScreenState extends State<UserScreen> {
         setState(() {
           _isSigningUpAndLogging = true;
         });
-        bool _isSuccess = await userProvider.createUser(
+        String message = await userProvider.createUser(
           _nameController.text,
           _passwordController.text,
           _emailController.text,
           _contactNumberController.text,
         );
-        if (!_isSuccess) {
+        if (message != null) {
           setState(() {
             _isSigningUpAndLogging = false;
           });
           Fluttertoast.showToast(
-            msg: "Email exist. Please login.",
+            msg: message,
             backgroundColor: Colors.red,
             textColor: Colors.white,
           );
@@ -363,7 +363,8 @@ class _UserScreenState extends State<UserScreen> {
       key: _scaffoldKey,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        title: Text('User Profile'),
+        centerTitle: true,
+        title: loggedInUser != null ? Text('User Profile') : Text('Login'),
       ),
       body: SingleChildScrollView(
           child: loggedInUser != null
@@ -420,7 +421,7 @@ class _UserScreenState extends State<UserScreen> {
                                           ? ""
                                           : loggedInUser.get('contact_number'),
                                 focusNode: _contactNumberFocusNode,
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
                                 decoration:
                                     InputDecoration(hintText: 'Contact Number'),
                               ),
@@ -468,6 +469,7 @@ class _UserScreenState extends State<UserScreen> {
                                       _isLoggingOut = true;
                                     });
                                     userProvider.userLogout().then((_) {
+                                      _contactNumberController.clear();
                                       setState(() {
                                         _isLoggingOut = false;
                                       });
