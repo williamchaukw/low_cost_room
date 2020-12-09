@@ -1,1 +1,47 @@
-{"web":{"client_id":"918812775186-hsrobrpda8bbiefe90cngmpamnicdkgj.apps.googleusercontent.com","project_id":"murah-stay","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"vi5IT6GsFHvC_hwT_a-Jl35_"}}
+{
+  "project_info": {
+    "project_number": "99448162092",
+    "project_id": "murah-stay-62724",
+    "storage_bucket": "murah-stay-62724.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99448162092:android:b10c9a31f5871f2f954e89",
+        "android_client_info": {
+          "package_name": "com.williamchau.murahstay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99448162092-525fj803qb96sl04c9mb5c3dvagk52d0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.williamchau.murahstay",
+            "certificate_hash": "ef77b473a060540be1f3529ddf7dc908eb0ddfbf"
+          }
+        },
+        {
+          "client_id": "99448162092-3a3bvh9mm17mppjt4obouck5it95urdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjd5_NOUOv0xbEh_NoEWFBguQLE2siWfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99448162092-3a3bvh9mm17mppjt4obouck5it95urdp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

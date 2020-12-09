@@ -10,6 +10,7 @@
 .svn/
 lib/api_key.dart
 lib/parse.dart
+android/app/src/google-services.json
 
 # IntelliJ related
 *.iml

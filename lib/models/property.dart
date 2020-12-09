@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:path/path.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
+// import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:intl/intl.dart';
 
 import '../parse.dart' as parse;
@@ -374,11 +375,13 @@ class Property with ChangeNotifier {
 
     // notifyListeners();
 
-    await Parse().initialize(
-      parse.applicationId,
-      'https://parseapi.back4app.com',
-      masterKey: parse.masterKey,
-    );
+    // await Parse().initialize(
+    //   parse.applicationId,
+    //   'https://parseapi.back4app.com',
+    //   masterKey: parse.masterKey,
+    //   autoSendSessionId: true,
+    //   coreStore: await CoreStoreSharedPrefsImp.getInstance(),
+    // );
 
     _properties.clear();
 
@@ -387,7 +390,7 @@ class Property with ChangeNotifier {
     if (response.success) {
       if (response.result != null) {
         for (var property in response.result) {
-          print(property.toString());
+          // print(property.toString());
           List<String> _propertyImages = new List<String>();
           _propertyImages.add(
               property["image_1"] != null ? property["image_1"]["url"] : "");
@@ -469,11 +472,11 @@ class Property with ChangeNotifier {
     // dio.Response response = await _dio.post("/Property", data: formData);
     // print(response.data.toString());
 
-    await Parse().initialize(
-      parse.applicationId,
-      'https://parseapi.back4app.com',
-      masterKey: parse.masterKey,
-    );
+    // await Parse().initialize(
+    //   parse.applicationId,
+    //   'https://parseapi.back4app.com',
+    //   masterKey: parse.masterKey,
+    // );
 
     var saveProperty = ParseObject('Property')
       ..set('name', property.name)

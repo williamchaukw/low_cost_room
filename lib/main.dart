@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 import './models/property.dart';
 import './models/user.dart';
@@ -13,13 +14,23 @@ import './screens/property_details_screen.dart';
 import './screens/search_screen.dart';
 import './screens/search_result_screen.dart';
 import './screens/user_property_edit_screen.dart';
+import './parse.dart' as parse;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) => runApp(MyApp()));
+  ]).then((_) async {
+    await Parse().initialize(
+      parse.applicationId,
+      'https://parseapi.back4app.com',
+      masterKey: parse.masterKey,
+      autoSendSessionId: true,
+      coreStore: await CoreStoreSharedPrefsImp.getInstance(),
+    );
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

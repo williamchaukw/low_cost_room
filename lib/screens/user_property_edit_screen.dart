@@ -516,6 +516,9 @@ class _UserPropertyEditScreenState extends State<UserPropertyEditScreen> {
                               Container(
                                   width: double.infinity,
                                   child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                    ),
                                     child: Text(
                                       'Update',
                                     ),
@@ -561,11 +564,14 @@ class _UserPropertyEditScreenState extends State<UserPropertyEditScreen> {
                                       }
                                     },
                                   )),
-                              SizedBox(height: 10),
+                              // SizedBox(height: 10),
                               //Delete button
                               Container(
                                   width: double.infinity,
                                   child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0)),
                                       child: Text(
                                         'Delete',
                                       ),

@@ -79,7 +79,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
     PropertyItem property;
 
-    GoogleSignInAccount account = userProvider.account;
+    // GoogleSignInAccount account = userProvider.account;
 
     if (routeData['isSearchResult'] as bool) {
       property = propertyData
@@ -151,7 +151,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     ],
                   ),
                   onPressed: () {
-                    account == null
+                    userProvider.loggedInAccountParse == null
                         ? showDialog(
                             context: context,
                             builder: (ctx) => _userAlert('Please login first'))

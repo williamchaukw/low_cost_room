@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import '../models/property.dart';
+import '../models/user.dart';
 import '../widgets/property_card.dart';
 import '../screens/property_details_screen.dart';
 import '../screens/search_screen.dart';
@@ -16,15 +17,26 @@ class PropertyListScreen extends StatefulWidget {
 class _PropertyListScreenState extends State<PropertyListScreen> {
   bool _isLoading = true;
 
+  bool _isInitialized = false;
+
   @override
   Widget build(BuildContext context) {
     final propertyProvider = Provider.of<Property>(context);
+    final userProvider = Provider.of<User>(context);
     final deviceSize = MediaQuery.of(context).size;
+
+    if (!_isInitialized) {
+      userProvider.userLoad().then((_) {
+        setState(() {
+          _isInitialized = true;
+        });
+      });
+    }
 
     if (_isLoading) {
       propertyProvider.getProperties().then((_) {
         setState(() {
-          _isLoading = !_isLoading;
+          _isLoading = false;
         });
       });
     }
@@ -105,6 +117,9 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                           Text('No property found'),
                           SizedBox(height: 10),
                           RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
