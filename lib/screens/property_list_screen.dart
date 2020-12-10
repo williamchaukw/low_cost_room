@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+// import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 import '../models/property.dart';
 import '../models/user.dart';
 import '../widgets/property_card.dart';
-import '../screens/property_details_screen.dart';
+// import '../screens/property_details_screen.dart';
 import '../screens/search_screen.dart';
 
 class PropertyListScreen extends StatefulWidget {
@@ -17,21 +17,14 @@ class PropertyListScreen extends StatefulWidget {
 class _PropertyListScreenState extends State<PropertyListScreen> {
   bool _isLoading = true;
 
-  bool _isInitialized = false;
-
   @override
   Widget build(BuildContext context) {
-    final propertyProvider = Provider.of<Property>(context);
+    final propertyProvider = Provider.of<Property>(context, listen: false);
     final userProvider = Provider.of<User>(context);
-    final deviceSize = MediaQuery.of(context).size;
+    // final deviceSize = MediaQuery.of(context).size;
 
-    if (!_isInitialized) {
-      userProvider.userLoad().then((_) {
-        setState(() {
-          _isInitialized = true;
-        });
-      });
-    }
+    print('<property_list_screen.dart> start');
+    print('<property_list_screen.dart> _isLoading: ' + _isLoading.toString());
 
     if (_isLoading) {
       propertyProvider.getProperties().then((_) {

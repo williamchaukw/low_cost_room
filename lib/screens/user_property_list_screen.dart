@@ -65,6 +65,8 @@ class _UserPropertyListScreenState extends State<UserPropertyListScreen> {
     final propertyData = Provider.of<Property>(context);
     final deviceSize = MediaQuery.of(context).size;
 
+    print('<user_property_list_screen.dart> start');
+
     if (userData.loggedInAccountParse != null) {
       if (!_isInitialized) {
         propertyData

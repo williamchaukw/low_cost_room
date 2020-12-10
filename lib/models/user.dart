@@ -56,7 +56,7 @@ class User extends ChangeNotifier {
         print('<user.dart> userLoad - user exist');
         _parseUser = currentUser;
         var userResult = currentUser.login();
-        notifyListeners();
+        // notifyListeners();
       }
     } catch (e) {
       print(e);

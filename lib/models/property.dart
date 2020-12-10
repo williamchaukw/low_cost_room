@@ -612,4 +612,9 @@ class Property with ChangeNotifier {
       return false;
     }
   }
+
+  void clearPropertyList() {
+    _properties.clear();
+    notifyListeners();
+  }
 }

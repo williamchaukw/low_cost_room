@@ -25,6 +25,7 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
+    print('<main.dart> start Parse initialization');
     await Parse().initialize(
       parse.applicationId,
       'https://parseapi.back4app.com',
@@ -32,6 +33,7 @@ void main() {
       autoSendSessionId: true,
       coreStore: await CoreStoreSharedPrefsImp.getInstance(),
     );
+    print('<main.dart> end Parse initialization');
     runApp(MyApp());
   });
 }

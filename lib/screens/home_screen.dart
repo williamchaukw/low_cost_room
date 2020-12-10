@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:low_cost_room/screens/user_add_property_screen.dart';
+// import 'package:low_cost_room/screens/user_add_property_screen.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/property_list_screen.dart';
 import '../screens/user_screen.dart';
 import '../screens/user_property_list_screen.dart';
 import '../screens/news_screen.dart';
 import '../screens/mobile_topup_screen.dart';
+import '../models/user.dart';
+import '../models/property.dart';
+import '.././global.dart';
 
 class HomeScreen extends StatefulWidget {
   static final route = '/home';
@@ -26,8 +30,22 @@ class _HomeScreenState extends State<HomeScreen> {
     UserScreen(),
   ];
 
+  // bool _isUserInitalized = false;
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: false);
+    // final propertyProvider = Provider.of<Property>(context, listen: false);
+
+    print('<home_screen.dart> start');
+
+    if (!isPropertyListScreenInitialized) {
+      userProvider.userLoad().then((_) {
+        // propertyProvider.clearPropertyList();
+        isPropertyListScreenInitialized = true;
+      });
+    }
+
     return Scaffold(
       // body: Navigator(
       //   key: _navigatorKey,
